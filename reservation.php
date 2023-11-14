@@ -17,7 +17,7 @@ include 'template\header.php'
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputName">Name</label>
-                    <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Your Name">
+                    <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Your Name" required>
                 </div>
             </div>
             <div class="form-row">
@@ -26,13 +26,13 @@ include 'template\header.php'
                 </div>
                 <div class="form-group col-md-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="inputGender" id="male" value="male">
+                            <input class="form-check-input" type="radio" name="inputGender" id="male" value="male" required>
                             <label class="form-check-label" for="male">Male</label>
                         </div>
                 </div>
                 <div class="form-group col-md-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="inputGender" id="female" value="female">
+                            <input class="form-check-input" type="radio" name="inputGender" id="female" value="female" required>
                             <label class="form-check-label" for="female">Female</label>
                         </div>
                 </div>
@@ -48,18 +48,21 @@ include 'template\header.php'
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputRoomType">Room Type</label>
-                    <select id="inputRoomType" name="inputRoomType" class="form-control">
-                        <option selected>Choose...</option>
+                    <select id="inputRoomType" name="inputRoomType" class="form-control" required>
+                        <option value="">Select room type</option>
                         <option value="standar">Standar</option>
                         <option value="deluxe">Deluxe</option>
                         <option value="family">Family</option>
                     </select>
+
+                    <label for="selectedPrice">Price:</label>
+                    <input type="text" id="selectedPrice" name="selectedPrice" class="form-control" readonly>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCheckIn">Reservation Date</label>
-                    <input type="date" class="form-control" id="inputReservationDate" name="inputReservationDate">
+                    <input type="date" class="form-control" id="inputReservationDate" name="inputReservationDate" required>
                 </div>
             </div>
             <div class="form-row">
@@ -131,6 +134,18 @@ include 'template\header.php'
                 durationHelp.innerHTML = 'Please enter a valid number for the duration.';
             }
         });
+    
+    //script untuk menampilkan harga per kamar
+    document.getElementById('inputRoomType').addEventListener('change', function() {
+        var selectedRoom = this.value;
+        var priceDisplay = document.getElementById('selectedPrice');
+        let price = roomPrices[selectedRoom];
+            if(typeof price =="undefined"){
+                price = 0;
+            }
+
+        priceDisplay.value= price.toLocaleString()
+    });
 
         function updateRoomPrice() {
             var roomTypeInput = document.getElementById('inputRoomType');

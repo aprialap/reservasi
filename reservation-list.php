@@ -19,7 +19,7 @@ $result = $conn->query($sql);
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">No.</th>
                     <th scope="col">Name</th>
                     <th scope="col">Gender</th>
                     <th scope="col">ID Number</th>
@@ -62,6 +62,7 @@ $result = $conn->query($sql);
         </table>
     </div>
 </body>
+
 
 <?php
 include 'template\footer.php';
